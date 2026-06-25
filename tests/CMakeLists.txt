@@ -7,8 +7,6 @@ FetchContent_Declare(
 set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 FetchContent_MakeAvailable(googletest)
 
-enable_testing()
-
 add_executable(engine_tests math/vec3_smoke_tests.cpp)
 
 target_link_libraries(engine_tests PRIVATE engine_math GTest::gtest_main)

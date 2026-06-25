@@ -67,3 +67,13 @@ vcpkg_installed/
 # test output & cache
 Testing/
 .cache/
+
+.vs/
+out/
+cmake-build-*/
+CMakeUserPresets.json
+
+*.user
+*.suo
+*.VC.db
+*.VC.VC.opendb

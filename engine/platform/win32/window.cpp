@@ -1,11 +1,10 @@
 #include "window.hpp"
+#include "window_class.hpp"
 
 #include <stdexcept>
 #include <cassert>
 
 namespace engine {
-    static const wchar_t CLASS_NAME[] = L"CPPEngineLabWindowClass";
-
     LRESULT CALLBACK Window::WindowProc(HWND hwnd, UINT uMsg, WPARAM wParam, LPARAM lParam)
     {
         if (uMsg == WM_NCCREATE) {
@@ -56,15 +55,16 @@ namespace engine {
         return 0;
     }
 
+    static WindowClass& window_class(HINSTANCE hInstance, WNDPROC wndProc) {
+        static WindowClass instance(hInstance, wndProc);
+        return instance;
+    }
+
 	Window::Window(const WindowConfig& config) : hInstance_(GetModuleHandleW(nullptr)), width_(config.width), height_(config.height) {
         assert(config.title != nullptr);
-        WNDCLASSW wc{};
+        WindowClass& wc = window_class(hInstance_, Window::WindowProc);
 
-        wc.lpfnWndProc = WindowProc;
-        wc.hInstance = hInstance_;
-        wc.lpszClassName = CLASS_NAME;
-
-        if (RegisterClassW(&wc) == 0) {
+        if (!wc.registered()) {
             throw std::runtime_error("Can not register window!");
         }
 

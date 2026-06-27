@@ -1,6 +1,6 @@
 #pragma once
 
-#include <windows.h>
+#include "windows_incl.hpp"
 
 
 namespace engine {

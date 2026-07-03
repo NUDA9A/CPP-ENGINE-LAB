@@ -1,16 +1,16 @@
 #include <iostream>
 
-#include <engine/platform/win32/window.hpp>
+#include <engine/runtime/application.hpp>
 
 int main() {
 	std::cout << "CPP-ENGINE-LAB started\n";
 
-	engine::WindowConfig window_cfg{ .title = L"CPP-ENGINE-LAB", .width = 1280, .height = 720 };
-	engine::Window window(window_cfg);
+	engine::Application app({ .window = {
+		.title = L"CPP-ENGINE-LAB",
+		.width = 1920,
+		.height = 1080
+		}
+		});
 
-	while (!window.should_close()) {
-		window.poll_events();
-	}
-
-	return 0;
+	return app.run();
 }

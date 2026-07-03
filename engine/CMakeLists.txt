@@ -10,7 +10,7 @@ target_include_directories(engine_platform PUBLIC ${PROJECT_SOURCE_DIR})
 
 target_compile_features(engine_platform PUBLIC cxx_std_23)
 
-add_library(engine_runtime STATIC runtime/application.cpp)
+add_library(engine_runtime STATIC runtime/application.cpp "runtime/clock.cpp")
 
 target_include_directories(engine_runtime PUBLIC ${PROJECT_SOURCE_DIR})
 

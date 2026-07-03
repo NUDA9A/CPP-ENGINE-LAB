@@ -1,11 +1,13 @@
 #pragma once
 
 #include <engine/platform/win32/window.hpp>
+#include <engine/runtime/clock.hpp>
 
 namespace engine {
 
     struct ApplicationConfig {
         WindowConfig window;
+        Clock clock;
     };
 
     class Application {
@@ -20,6 +22,7 @@ namespace engine {
 
     private:
         Window window_;
+        Clock clock_;
     };
 
 } // namespace engine

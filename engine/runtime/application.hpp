@@ -7,7 +7,6 @@ namespace engine {
 
     struct ApplicationConfig {
         WindowConfig window;
-        Clock clock;
     };
 
     class Application {

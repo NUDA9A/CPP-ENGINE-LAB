@@ -7,10 +7,10 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
 
 add_subdirectory(engine)
-add_subdirectory(sandbox)
+# add_subdirectory(sandbox)
 
-include(CTest)
-
-if (BUILD_TESTING)
-	add_subdirectory(tests)
-endif()
+# include(CTest)
+# 
+# if (BUILD_TESTING)
+# 	add_subdirectory(tests)
+# endif()

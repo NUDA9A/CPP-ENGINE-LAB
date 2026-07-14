@@ -1,5 +1,5 @@
-add_library(Kernel INTERFACE)
+add_library(Kernel STATIC private/module_registry.cpp)
 
-target_include_directories(Kernel INTERFACE $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/public/>)
+target_include_directories(Kernel PUBLIC $<BUILD_INTERFACE:${CMAKE_CURRENT_SOURCE_DIR}/public/>)
 
-target_compile_features(Kernel INTERFACE cxx_std_23)
+target_compile_features(Kernel PUBLIC cxx_std_23)

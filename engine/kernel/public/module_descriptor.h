@@ -1,3 +1,8 @@
+/*
+* This file defines ModuleDescriptor - core abstraction of the Module.
+* ModuleDescriptor represent metadata describing a Module. ModuleId default value 0 is not valid and not being accepted during Module registration.
+*/
+
 #pragma once
 
 #include "aliases.h"

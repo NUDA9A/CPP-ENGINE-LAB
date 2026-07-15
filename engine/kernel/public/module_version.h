@@ -1,3 +1,8 @@
+/*
+* This file defines ModuleVersion (semantic version metadata) - abstraction needed for versioning Modules.
+* Module default version 0.0.0 is not valid and not being accepted during Module registration.
+*/
+
 #pragma once
 
 #include <cstdint>

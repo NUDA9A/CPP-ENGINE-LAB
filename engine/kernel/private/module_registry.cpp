@@ -6,6 +6,17 @@
 #include <utility>
 
 namespace engine::kernel {
+
+	/*
+	* Registers an owned copy of a valid ModuleDescriptor.
+	*
+	* Rejects registration after freeze, invalid module metadata,
+	* invalid or duplicate dependency declarations, and duplicate ModuleId values.
+	* Dependency resolution is intentionally outside this method's scope.
+	*
+	* On success, returns ModuleRegistryError::OK.
+	* On every returned error, the Registry remains unchanged.
+	*/
 	ModuleRegistryError ModuleRegistry::registerModule(const ModuleDescriptor& mD) {
 		const ModuleVersion invalidVersion = ModuleVersion{};
 
@@ -65,6 +76,12 @@ namespace engine::kernel {
 		return ModuleRegistryError::OK;
 	}
 
+	/*
+	* Returns a pointer to the Registry-owned ModuleDescriptor,
+	* or nullptr if the ModuleId is not registered.
+	*
+	* The returned pointer remains valid until ModuleRegistry destruction.
+	*/
 	const ModuleDescriptor* ModuleRegistry::getModule(const ModuleId mId) const {
 		if (auto res = registered_modules_.find(mId); res != registered_modules_.end()) {
 			return &res->second;
@@ -77,11 +94,13 @@ namespace engine::kernel {
 		return registered_modules_.size();
 	}
 
+	// Returns reference on the sorted (by ModuleId in incrementing order) registered ModuleDescriptors pointers. Asserts that ModuleRegistry is frozen by freeze() function.
 	const std::vector<const ModuleDescriptor*>& ModuleRegistry::getModules() const {
 		assert(freezed_);
 		return frozen_snapshot_;
 	}
 
+	// If Registry is already frozen - no-op. Otherwise, fill frozen_snapshot_ vector and sorts it. Freeze Registry at the end.
 	void ModuleRegistry::freeze() {
 		if (freezed_) {
 			return;
